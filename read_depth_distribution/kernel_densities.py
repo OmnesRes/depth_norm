@@ -36,8 +36,8 @@ def get_density(file):
         depths = 0
         probs = 0
     else:
-        tail_prob = sum(result > 250) / len(result)
-        result = result[result <= 250]
+        tail_prob = sum(result >= 250) / len(result)
+        result = result[result < 250]
         kde = KernelDensity(bandwidth=4.64, kernel='gaussian')
         kde.fit(result[:, np.newaxis])
         x = np.linspace(0, max(result), 1000)
