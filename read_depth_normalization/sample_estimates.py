@@ -17,7 +17,6 @@ else:
     import sys
     sys.path.append(str(cwd))
 
-
 depths = pickle.load(open(cwd / 'read_depth_distribution' / 'results' / 'depths.pkl', 'rb'))
 probabilities, sample_df = pickle.load(open(cwd / 'read_depth_normalization' / 'results' / 'probabilities.pkl', 'rb'))
 

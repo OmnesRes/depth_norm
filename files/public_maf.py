@@ -16,6 +16,7 @@ else:
 
 usecols = ['Chromosome', 'Start_Position', 'End_Position', 'STRAND', 'Variant_Type', 'Variant_Classification', 'Reference_Allele', 'Tumor_Seq_Allele2', 't_ref_count', 't_alt_count', 'Tumor_Sample_Barcode', 'Matched_Norm_Sample_Barcode', 'FILTER']
 
+##https://gdc.cancer.gov/about-data/publications/mc3-2017
 tcga_maf = pd.read_csv(cwd / 'files' / 'mc3.v0.2.8.PUBLIC.maf', sep='\t', usecols=usecols, low_memory=False)
 
 ##The MAF contains nonpreferred pairs which results in some samples having duplicated variants
@@ -43,7 +44,8 @@ sample_to_id = {}
 for i in metadata:
     sample_to_id[i['associated_entities'][0]['entity_submitter_id']] = i['associated_entities'][0]['entity_id']
 
-cmd = ['ls', 'files/coverage_beds/broad/']
+##broad coverage beds https://www.synapse.org/#!Synapse:syn21785741
+cmd = ['ls', 'files/coverage_beds/']
 p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 files = [str(i, 'utf-8') for i in p.communicate()[0].split() if '.bed' in str(i)[-5:]]
 

@@ -41,7 +41,7 @@ def get_fraction(sample):
 
 fractions = {}
 sample_df = sample_df[sample_df['Tumor_Sample_Barcode'].isin(depths)]
-mc3_pcawg = pd.read_csv('files/mc3_pcawg.csv', sep=',')
+mc3_pcawg = pd.read_csv(cwd / 'files' / 'mc3_pcawg.csv', sep=',') ##from https://mbailey.shinyapps.io/MAFit/
 mc3_pcawg = mc3_pcawg.loc[mc3_pcawg['id_match'] > 5]
 sample_df = sample_df.loc[sample_df['Tumor_Sample_Barcode'].isin(mc3_pcawg['mc3_exome_barcode'])]
 with concurrent.futures.ProcessPoolExecutor(max_workers=40) as executor:

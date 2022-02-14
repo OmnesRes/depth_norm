@@ -117,6 +117,7 @@ for read_depth in tqdm(range(8, 250)):
         expected_data = {}
         for index, i in enumerate(np.round_(x/read_depth, 2)):
             expected_data[i] = expected_data.get(i, []) + [weighted[index]]
+        ##above a read depth of 100 some bins have more than one value
         expected_data = {i: np.sum(expected_data[i]) for i in expected_data}
         assert list(expected_data.keys()) == sorted(expected_data.keys())
         expected[bin] = expected_data
@@ -143,5 +144,5 @@ for bin in bins:
     z = lowess(filters[bin], np.arange(8, max_depth), return_sorted=False, frac=.15)
     filter_dict[bin] = {i: j for i, j in zip(np.arange(8, max_depth), z)}
 
-with open(cwd / 'read_depth_normalization' / 'results' / 'probabities.pkl', 'wb') as f:
+with open(cwd / 'read_depth_normalization' / 'results' / 'probabilities.pkl', 'wb') as f:
     pickle.dump([filter_dict, sample_df], f)
